@@ -3,41 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotels - Ahobilam Hotels & Services</title>
+    <title>Ahobilam Hotels & Services - Ahobilam</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        .booking-row {
+            display: flex;
+            flex-wrap: wrap; /* ఇది ముఖ్యం: స్థలం లేకపోతే కిందకు వస్తాయి */
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .booking-col {
+            flex: 1;
+            min-width: 130px; /* బాక్సు మరీ చిన్నగా అయిపోకుండా చూస్తుంది */
+        }
+        .booking-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+            background: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
 
     <header class="main-header">
         <div class="logo-area">
-            <img src="logo.png" alt="Ahobilam Logo" class="site-logo">
+            <a href="index.html" style="display: inline-block;">
+                <img src="logo.png" alt="Ahobilam Logo" class="site-logo">
+            </a>
         </div>
 
         <nav class="nav-links" id="navMenu">
             <ul>
                 <li><a href="index.html">HOME</a></li>
-                <li><a href="hotels.html" class="active">HOTELS</a></li>
-                <li><a href="History-of-Ahobilam.html">ABOUT AHOBILAM</a></li>
+                <li><a href="hotels.html">HOTELS</a></li>
+                <li><a href="history-of-ahobilam.html">ABOUT AHOBILAM</a></li>
                 <li><a href="Ahobilam-Yatra-Guide.html">TEMPLE TIMINGS</a></li>
-                <li><a href="Contact.html" class="active">CONTACT</a></li>
+                <li><a href="contact.html" class="active">CONTACT</a></li>
+                <li><a href="#blogs">BLOGS</a></li>
             </ul>
         </nav>
 
         <div class="header-right">
-            <a href="#" class="account-btn">
+            <a href="account.html" class="account-btn">
                 <svg class="user-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
-                <span class="account.html">MY ACCOUNT</span>
+                <span class="btn-text">MY ACCOUNT</span>
             </a>
             <div class="mobile-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
             </div>
         </div>
     </header>
-
     <div class="hotel-list-container">
         
         <h1 style="text-align:center; margin: 30px 0; font-family:'Playfair Display';">Choose Your Stay in Ahobilam</h1>
