@@ -299,30 +299,7 @@
             <div class="hotel-faq-answer">Yes, almost all guest houses and hotels in Ahobilam provide safe parking spaces for cars and tourist buses.</div>
         </div>
     </div>
-
-<script>
-        // మొబైల్ మెనూ స్క్రిప్ట్
-        function toggleMenu() {
-            var nav = document.getElementById("navMenu");
-            nav.classList.toggle("active");
-        }
-
-        // కొత్త FAQ స్క్రిప్ట్ (Hotel Page Only)
-        const hotelFaqItems = document.querySelectorAll('.hotel-faq-item');
-
-        hotelFaqItems.forEach(item => {
-            const question = item.querySelector('.hotel-faq-question');
-            question.addEventListener('click', () => {
-                // మిగతావి క్లోజ్ చేయడం
-                hotelFaqItems.forEach(other => {
-                    if (other !== item) other.classList.remove('active');
-                });
-                // క్లిక్ చేసినది ఓపెన్ చేయడం
-                item.classList.toggle('active');
-            });
-        });
-    </script>
-
+    
 <footer class="main-footer">
     <div class="footer-container">
         
@@ -385,50 +362,63 @@ s0.parentNode.insertBefore(s1,s0);
 <!--End of Tawk.to Script-->
 
 <script>
-        // 1. Mobile Menu Toggle
-        function toggleMenu() {
-            var menu = document.getElementById("navMenu");
-            menu.classList.toggle("active");
-        }
+    // 1. Mobile Menu Toggle (మొబైల్ మెనూ)
+    function toggleMenu() {
+        var nav = document.getElementById("navMenu");
+        nav.classList.toggle("active");
+    }
 
-        // 2. Booking Function (Duplicate Fix Added)
-        function bookRoom(hotelName, roomType) {
-            // పాత బుకింగ్స్ తెచ్చుకోవడం
-            let bookings = JSON.parse(localStorage.getItem('ahobilam_bookings')) || [];
+    // 2. FAQ Logic (ప్రశ్నలు క్లిక్ చేస్తే ఓపెన్ అవ్వడం)
+    const hotelFaqItems = document.querySelectorAll('.hotel-faq-item');
+    if (hotelFaqItems.length > 0) {
+        hotelFaqItems.forEach(item => {
+            const question = item.querySelector('.hotel-faq-question');
+            question.addEventListener('click', () => {
+                // మిగతావి క్లోజ్ చేయడం
+                hotelFaqItems.forEach(other => {
+                    if (other !== item) other.classList.remove('active');
+                });
+                // క్లిక్ చేసినది ఓపెన్ చేయడం
+                item.classList.toggle('active');
+            });
+        });
+    }
+
+    // 3. Booking Function (బుకింగ్ లాజిక్)
+    function bookRoom(hotelName, roomType, totalRooms) {
+        // పాత బుకింగ్స్ తెచ్చుకోవడం
+        let bookings = JSON.parse(localStorage.getItem('ahobilam_bookings')) || [];
+        
+        // ఫోన్ నెంబర్ అడగడం
+        let phone = prompt("Please enter your Phone Number to confirm booking:");
+        
+        if (phone) {
+            let nextId = bookings.length + 1;
+            let bookingId = "Booking #" + nextId;
+            let today = new Date().toISOString().split('T')[0];
+
+            let newBooking = {
+                id: bookingId,
+                hotel: hotelName,
+                room: roomType,
+                date: today,
+                status: "Pending",
+                phone: phone
+            };
+
+            // సేవ్ చేయడం
+            bookings.push(newBooking);
+            localStorage.setItem('ahobilam_bookings', JSON.stringify(bookings));
+            localStorage.setItem('user_phone', phone);
+
+            alert("✅ Booking Successful!\nYour Booking ID: " + bookingId);
             
-            // ఫోన్ నెంబర్ అడగడం
-            let phone = prompt("Please enter your Phone Number for booking:");
-            
-            if (phone) {
-                // కొత్త ID క్రియేట్ చేయడం (Booking #1, #2...)
-                let nextId = bookings.length + 1;
-                let bookingId = "Booking #" + nextId;
-                let today = new Date().toISOString().split('T')[0];
-
-                // డేటా సిద్ధం చేయడం
-                let newBooking = {
-                    id: bookingId,
-                    hotel: hotelName,
-                    room: roomType,
-                    date: today,
-                    status: "Pending", // Default status
-                    phone: phone
-                };
-
-                // సేవ్ చేయడం
-                bookings.push(newBooking);
-                localStorage.setItem('ahobilam_bookings', JSON.stringify(bookings));
-                localStorage.setItem('user_phone', phone); // ఫోన్ నెంబర్ సేవ్
-
-                alert("✅ Booking Successful!\nYour Booking ID: " + bookingId);
-                
-                // స్టేటస్ పేజీకి వెళ్ళడం (Optional)
-                window.location.href = "account.html"; 
-            } else {
-                alert("Booking Cancelled. Phone number is required.");
-            }
+            // అకౌంట్ పేజీకి వెళ్ళడం
+            window.location.href = "account.html"; 
+        } else {
+            console.log("Booking Cancelled");
         }
-    </script>
-
+    }
+</script>
 </body>
 </html>

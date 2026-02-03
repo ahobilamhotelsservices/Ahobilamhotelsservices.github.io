@@ -572,10 +572,19 @@ body { font-family: 'Poppins', sans-serif; }
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     .event-card {
-        flex: 0 0 300px; /* Small cards for mobile */
-        flex-direction: column; /* Stack image and info */
+        /* పాత కోడ్: flex: 0 0 300px; అని ఉంది కదా దాన్ని తీసేయండి */
+        
+        /* కొత్త కోడ్: */
+        flex: 0 0 85%;       /* స్క్రీన్ వెడల్పులో 85% తీసుకుంటుంది */
+        max-width: 380px;    /* మరీ పెద్దగా సాగకుండా చూస్తుంది */
+        flex-direction: column; /* ఇమేజ్ పైన, మేటర్ కింద వస్తుంది */
+        margin-right: 15px;  /* పక్కన ఉన్న కార్డుకి కొంచెం గ్యాప్ ఇస్తుంది */
+        scroll-snap-align: center; /* స్క్రోల్ ఆపినప్పుడు కరెక్ట్ గా మధ్యలో ఆగుతుంది */
     }
-    .event-img { height: 180px; }
+
+    .event-img { 
+        height: 220px; /* ఇమేజ్ హైట్ కొంచెం పెంచితే అందంగా ఉంటుంది */
+    }
 }
 /* FAQ Section Premium Styling */
 .faq-section {
